@@ -12,20 +12,6 @@ pipeline {
 
    stages {
 
-      stage("init") {
-
-         steps {
-
-            script {
-
-               gv = load "script.groovy"
-
-            }
-
-         }
-
-      }
-
       stage("Checkout") {
 
          steps {
@@ -41,30 +27,6 @@ pipeline {
          steps {
 
             sh 'docker-compose build web'
-
-         }
-
-      }
-
-      stage("test") {
-
-         when {
-
-            expression {
-
-               params.executeTests
-
-            }
-
-         }
-
-         steps {
-
-            script {
-
-               gv.testApp()
-
-            }
 
          }
 
@@ -86,9 +48,9 @@ pipeline {
 
                sh "docker tag jenkins-pipeline_web:latest yoonhyunchan/jenkins-app:${BUILD_NUMBER}"
 
-               sh "docker login yoonhyunchan -p kaka0422~
+               sh "docker login -u yoonhyunchan -p ${DOCKER_USER_PASSWORD}"
 
-               sh "docker push yoonhyunchan/jenkins-app:${BUILD_NUMBER}"
+               sh "docker push ${DOCKER_USER_ID}/jenkins-app:${BUILD_NUMBER}"
 
             }
 
