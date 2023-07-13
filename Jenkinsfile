@@ -48,7 +48,7 @@ pipeline {
 
                sh "docker tag jenkins-pipeline_web:latest yoonhyunchan/jenkins-app:${BUILD_NUMBER}"
 
-               sh "docker login -u yoonhyunchan -p kaka0422~"
+               sh "docker login -u yoonhyunchan -p dckr_pat_KrjNJeBxCTqC_DceU2FyILzw5gg"
 
                sh "docker push yoonhyunchan/jenkins-app:${BUILD_NUMBER}"
 
